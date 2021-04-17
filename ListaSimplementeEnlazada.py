@@ -113,8 +113,9 @@ class Lista1Enlace:
             mensaje = ('La lista esta vacia')
         else:
             puntero = self.first
+            mensaje = ""
             while(puntero != None):
-                mensaje = '[' +  puntero.value + ']'+  ', '
+                mensaje += str(puntero.value) +  ', '
                 puntero = puntero.siguiente
         return mensaje 
 

@@ -1,7 +1,7 @@
 import ListaSimplementeEnlazada
 import PalabraC
 import PalabrasC
-
+from colorama import Fore
 
 class Registrador:
 
@@ -22,16 +22,19 @@ class VectorDeListas:
     def añadirPalabra(self, palabra):#Donde palabra es un objeto de tipo Palabra()
         if self.VectorPalabras[palabra.Llave()].first.value is None:
             self.VectorPalabras[palabra.Llave()].añadir(palabra)
+            self.VectorPalabras[palabra.Llave()].first.value.Lineas.añadir(self.NumeroDeLinea)
+            self.VectorPalabras[palabra.Llave()].first.value.Repeticiones += 1
         else:
             puntero = self.VectorPalabras[palabra.Llave()].first
             while True:
-                if puntero.value.Letras == palabra.Letras:
+                if puntero.value.Letras.lower() == palabra.Letras.lower():
                     puntero.value.Repeticiones += 1
-                    puntero.value.Lineas().añadir(self.NumeroDeLinea)
+                    puntero.value.Lineas.añadir(self.NumeroDeLinea)
                     break
                 if puntero.siguiente is None:
                     self.VectorPalabras[palabra.Llave()].añadir(palabra)
-                    puntero.value.Lineas().añadir(self.NumeroDeLinea)
+                    puntero.siguiente.value.Repeticiones += 1
+                    puntero.siguiente.value.Lineas.añadir(self.NumeroDeLinea)
                     break
                 puntero = puntero.siguiente
     def CrearPalabra(self, mensaje):
@@ -46,21 +49,30 @@ class VectorDeListas:
                 palabraN = PalabraC.Palabra()
             if mensaje[i] == "\n":
                 self.añadirPalabra(palabraN)
-                self.NumeroDeLinea += 1
                 palabraN = PalabraC.Palabra()
-            else:
+                self.NumeroDeLinea += 1
+            if mensaje[i] != " " and mensaje[i] != "\n" and mensaje[i] != ".":
                 palabraN.Letras += mensaje[i]
+            if i == len(mensaje) - 1:
+                self.añadirPalabra(palabraN)
+
     def ImprimirVdL(self):
         for i in range(0,self.m):
-            if self.VectorPalabras[i].first.value is None:
-                pass
-            else:
+            if self.VectorPalabras[i].first.value is not None:
                 puntero = self.VectorPalabras[i].first
                 while True:
-                    print(puntero.value.Letras," se repite ", puntero.value.Repeticiones,"Aparece en las lineas :" , puntero.value.Lineas().Str() + " , ")
-                    if puntero.siguiente is  None:
-                        break
+                    print(Fore.WHITE + puntero.value.Letras, end="")
+                    t = 15 - len(puntero.value.Letras)
+                    m = ""
+                    m += " "*t
+                    print(Fore.GREEN + m + 'se repite', end=" ")
+                    print(Fore.WHITE + str(puntero.value.Repeticiones), end=" ")
+                    print(Fore.GREEN + 'veces y Aparece en las lineas :', end=" ")
+
+                    print(Fore.WHITE + puntero.value.Lineas.Str())
                     puntero = puntero.siguiente
+                    if puntero is None:
+                        break
     def MostrarPalabrasEnMensaje(self, mensaje):
         self.CrearPalabra(mensaje)
         print("El mensaje es: ")
