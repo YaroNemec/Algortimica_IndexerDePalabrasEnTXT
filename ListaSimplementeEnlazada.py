@@ -26,7 +26,7 @@ class Node:
     
 class Lista1Enlace:
     first = Node(None, None)
-    last = Node(None,None)
+    last = Node(None, None)
     def __init__(self):
         pass
         
@@ -108,6 +108,16 @@ class Lista1Enlace:
                     
         #Eficiencia(n) = 4 + 6n
                     
+    def Str(self):
+        if self.first.value is None :
+            mensaje = ('La lista esta vacia')
+        else:
+            puntero = self.first
+            while(puntero != None):
+                mensaje = '[' +  puntero.value + ']'+  ', '
+                puntero = puntero.siguiente
+        return mensaje 
+
     def imprimir(self):
         if self.first.value is None :
             print('La lista esta vacia')
