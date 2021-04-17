@@ -6,14 +6,19 @@ class Registrador:
         pass
 
 class VectorDeListas:
-   # Palabras = [Palabra() for i in range(5000)]
+    Palabras = [Palabras() for i in range(5000)]
     def __init__(self):
         pass
 
-
-class Palabra(ListaSimplementeEnlazada.Lista1Enlace):
+class Palabra():
     Repeticiones = 0
-    Linea = ""
+    Lineas = ListaSimplementeEnlazada.Lista1Enlace
     Letras= ""
+    def __init__(self):
+        pass
+    def Llave(self):#FunciónHash 
+        pass
+
+class Palabras(ListaSimplementeEnlazada.Lista1Enlace):
     def __init__(self):
         pass
