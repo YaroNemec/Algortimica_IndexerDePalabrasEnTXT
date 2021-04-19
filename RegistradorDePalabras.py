@@ -20,19 +20,19 @@ class VectorDeListas:
             self.VectorPalabras.append(Nuevo)
 
     def añadirPalabra(self, palabra):#Donde palabra es un objeto de tipo Palabra()
-        if self.VectorPalabras[palabra.Llave()].first.value is None:
-            self.VectorPalabras[palabra.Llave()].añadir(palabra)
-            self.VectorPalabras[palabra.Llave()].first.value.Lineas.añadir(self.NumeroDeLinea)
-            self.VectorPalabras[palabra.Llave()].first.value.Repeticiones += 1
+        if self.VectorPalabras[palabra.Llave(self.m)].first.value is None:
+            self.VectorPalabras[palabra.Llave(self.m)].añadir(palabra)
+            self.VectorPalabras[palabra.Llave(self.m)].first.value.Lineas.añadir(self.NumeroDeLinea)
+            self.VectorPalabras[palabra.Llave(self.m)].first.value.Repeticiones += 1
         else:
-            puntero = self.VectorPalabras[palabra.Llave()].first
+            puntero = self.VectorPalabras[palabra.Llave(self.m)].first
             while True:
                 if puntero.value.Letras.lower() == palabra.Letras.lower():
                     puntero.value.Repeticiones += 1
                     puntero.value.Lineas.añadir(self.NumeroDeLinea)
                     break
                 if puntero.siguiente is None:
-                    self.VectorPalabras[palabra.Llave()].añadir(palabra)
+                    self.VectorPalabras[palabra.Llave(self.m)].añadir(palabra)
                     puntero.siguiente.value.Repeticiones += 1
                     puntero.siguiente.value.Lineas.añadir(self.NumeroDeLinea)
                     break
